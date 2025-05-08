@@ -17,6 +17,10 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Login to Azure Container Registry
+        run: |
+          az acr login --name f2aprod
+
       - name: Build and Push Docker Image
         run: |
           docker build -t f2aprod.azurecr.io/f2a-resume:${{ github.sha }} .
