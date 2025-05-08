@@ -32,5 +32,4 @@ jobs:
             --name f2a-resume \
             --resource-group f2a-prod \
             --image f2aprod.azurecr.io/f2a-resume:${{ github.sha }} \
-            --registry-server f2aprod.azurecr.io \
             --query "properties.configuration.image" -o tsv
