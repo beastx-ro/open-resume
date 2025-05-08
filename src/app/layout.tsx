@@ -7,12 +7,7 @@ export const metadata = {
   description:
     "OpenResume is a free, open-source, and powerful resume builder that allows anyone to create a modern professional resume in 3 simple steps. For those who have an existing resume, OpenResume also provides a resume parser to help test and confirm its ATS readability.",
   robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: false,
-    },
+    index: false,
   },
 };
 
