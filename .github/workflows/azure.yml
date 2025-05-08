@@ -1,5 +1,5 @@
 # .github/workflows/azure.yml
-name: Build and Deploy to Azure
+name: Build, Push, and Deploy to Azure Container App
 
 on:
   push:
@@ -26,4 +26,11 @@ jobs:
           docker build -t f2aprod.azurecr.io/f2a-resume:${{ github.sha }} .
           docker push f2aprod.azurecr.io/f2a-resume:${{ github.sha }}
 
-      
+      - name: Deploy to Azure Container App
+        run: |
+          az containerapp update \
+            --name f2a-resume \
+            --resource-group f2a-prod \
+            --image f2aprod.azurecr.io/f2a-resume:${{ github.sha }} \
+            --registry-server f2aprod.azurecr.io \
+            --query "properties.configuration.image" -o tsv
