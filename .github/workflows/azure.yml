@@ -1,0 +1,25 @@
+# .github/workflows/azure.yml
+name: Build and Deploy to Azure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t f2aprod.azurecr.io/f2a-resume:${{ github.sha }} .
+          docker push f2aprod.azurecr.io/f2a-resume:${{ github.sha }}
+
+      
